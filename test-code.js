@@ -1,6 +1,19 @@
 var Contract = require('web3-eth-contract');
 
-// set provider for all later instances to use
+var adminPrivateKey = '8789e52bc516e84b84d118a573fb5a4ea3c471693e1e2cf9c07962bac3cc6e89';
+var adminWallet = '0x9cb157463c818084f9bf5a632e5bac75fd31c490';
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'testdb'
+});
+
+connection.connect();
+
+// test net
 //Contract.setProvider('wss://:e36b9ab0afb6412683d28e0843ff15eb@rinkeby.infura.io/ws/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
 // Main net
 Contract.setProvider('wss://:e36b9ab0afb6412683d28e0843ff15eb@mainnet.infura.io/ws/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
@@ -9,8 +22,31 @@ var	jsonInterface =	[{"constant":true,"inputs":[],"name":"name","outputs":[{"nam
 var Contractaddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
 // testnet 
 //var Contractaddress = "0xe825853442ef72f3a4b357dfd7db6c67b26613d9";
-
 var contract = new Contract(jsonInterface, Contractaddress);
+
+var wallets = [];
+connection.query('select address from coin_address where updated_at IS NULL' , function (error, results, fields) {
+  if (error) throw error;
+  if(results.length > 0){
+  		console.log(results[0].address);
+  		if(results[0].toString().indexOf('0x')<0){
+  			addr = '0x'+results[0].address;  			
+  		}else{
+  			addr = results[0].address;
+  		}
+  		wallets.push(addr);
+  }else{
+  		console.log("no record found");
+  }
+});
+
+connection.end();
+
+setTimeout(()=>{	
+	for(i=0;i<wallets.length;i++){		
+		balanceChecker(wallets[i].toString());
+	}	
+}, 4000);
 
 /*
 contract.methods.balanceOf('0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a').send({from: '0x7d588db40fe27f92785abc6c1d5249c6670878da'})
@@ -19,10 +55,41 @@ contract.methods.balanceOf('0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a').send({f
 });
 */
 
-contract.methods.balanceOf('0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a')
-.call()
-.then(function(res){
-	console.log(res);	
-}).catch(function(e){
-	console.log(e);
-});
+//'0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a'
+function balanceChecker(wallet){
+	console.log(" in balanceChecker Function ...");
+	contract.methods.balanceOf(wallet)
+	.call()
+	.then(function(res){				
+		console.log(res);	
+		// uncomment below line ...
+		//if(res > 0){
+			sendEthersToWallet(wallet);			
+		//}
+	}).catch(function(e){
+		console.log(e);
+	});
+}
+
+// admin send ethers to wallet/user
+function sendEthersToWallet(wallet){
+	var Web3 = require('web3');
+	var web3 = new Web3('https://rinkeby.infura.io/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
+	console.log("In send ether function....");
+	/*
+	web3.eth.sendTransaction({
+	    from: adminWallet.toString(),
+	    gasPrice: "20000000000",
+	    gas: "21000",
+	    to: wallet.toString(),
+	    value: "1000000000000000000",
+	    data: ""
+	}, adminPrivateKey).then(console.log);
+	*/
+	
+	web3.eth.accounts.signTransaction({
+	    to: wallet.toString(),
+	    value: '1000000000',
+	    gas: 2000000
+	}, adminPrivateKey).then(console.log);
+}
