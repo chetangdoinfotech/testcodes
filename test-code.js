@@ -1,7 +1,7 @@
 var Contract = require('web3-eth-contract');
 
-var adminPrivateKey = '8789e52bc516e84b84d118a573fb5a4ea3c471693e1e2cf9c07962bac3cc6e89';
-var adminWallet = '0x9cb157463c818084f9bf5a632e5bac75fd31c490';
+var adminPrivateKey = '609e08f39a415e13901556f3eb55a47cae9b1603561381d3221971f8fe6987f5';
+var adminWallet = '0xe528fbc00c10874f01d7fc97c308721e5faf9b8e';
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
@@ -74,8 +74,11 @@ function balanceChecker(wallet){
 // admin send ethers to wallet/user
 function sendEthersToWallet(wallet){
 	var Web3 = require('web3');
-	var web3 = new Web3('https://rinkeby.infura.io/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
+	var web3 = new Web3('wss://:e36b9ab0afb6412683d28e0843ff15eb@ropsten.infura.io/ws/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
 	console.log("In send ether function....");
+	console.log("WAllet ID::::::");
+	console.log(wallet.toString());
+	//console.log(web3.eth);
 	/*
 	web3.eth.sendTransaction({
 	    from: adminWallet.toString(),
@@ -86,10 +89,55 @@ function sendEthersToWallet(wallet){
 	    data: ""
 	}, adminPrivateKey).then(console.log);
 	*/
-	
+	try{
+    	web3.eth.getTransactionCount(adminWallet.toString(),"pending").then((n)=>{
+    		console.log("NONCE::::");
+    		console.log(n);    		
+    		/////
+			const Transaction = require('ethereumjs-tx').Transaction;
+			const Common = require('ethereumjs-common').default;
+			const toBuffer = require('ethereumjs-util');	
+			web3.eth.getGasPrice().then((gasPrice) => {
+				console.log("<<<<<.... GAS Price ....>>>>>");
+				console.log(gasPrice);
+				///
+				var rawTx = {						
+					  nonce: web3.utils.toHex(n),
+					  gasPrice: web3.utils.toHex(gasPrice),
+					  gas: web3.utils.toHex(10000000),
+					  gasLimit: web3.utils.toHex(2500000),
+					  to: wallet.toString(),
+					  value: web3.utils.toHex(0),
+					  data: '0x0'
+				}
+				console.log("<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>");
+				console.log(rawTx);
+				const tx = new Transaction('0x'+rawTx, { chain: 'ropsten', hardfork: 'petersburg' });			
+				 
+				var privateKey = Buffer.from(adminPrivateKey, 'hex');				
+				console.log(privateKey);
+				const signedTx = tx.sign(privateKey);
+				console.log(signedTx);			 
+				const serializedTx = signedTx.serialize();
+				console.log(serializedTx);
+				///	
+			}).catch((e)=>{ console.log(e); });
+			/*
+			
+			*/
+    		/////
+    	}).catch((e)=>{
+    		console.log(e)
+    	})    	
+    }catch(e){
+    	console.log(e)
+    }
+
+    /*
 	web3.eth.accounts.signTransaction({
 	    to: wallet.toString(),
 	    value: '1000000000',
 	    gas: 2000000
 	}, adminPrivateKey).then(console.log);
+	*/
 }
