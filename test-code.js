@@ -27,7 +27,7 @@ connection.query('select address from coin_address where admin_ethsent_touser=0 
   		console.log("=====================================================");			  					  		
 		console.log(Date());	
   		console.log(results[0].address);
-  		if(results[0].toString().indexOf('0x')<0){
+  		if(results[0].address.indexOf('0x') < 0){
   			addr = '0x'+results[0].address;  			
   		}else{
   			addr = results[0].address;
@@ -39,7 +39,8 @@ connection.query('select address from coin_address where admin_ethsent_touser=0 
 });
 
 setTimeout(()=>{	
-	for(i=0;i<wallets.length;i++){		
+	for(i=0;i<wallets.length;i++){
+		console.log(wallets);			
 		balanceChecker(wallets[i].toString());
 	}	
 }, 2000);
@@ -130,7 +131,8 @@ function sendEthersToWallet(wallet){
 	function chagetableStatus(walletid){
 		console.log(">>>>> IN CHANGE TABLE STATUS >>>>>");
 		try{
-			var sql="update coin_address SET `admin_ethsent_touser`=1 where address='"+walletid.toString()+"'";
+			var walletid1 = walletid.substr(2);
+			var sql="update coin_address SET `admin_ethsent_touser`=1 where address='"+walletid.toString()+"' || address='"+walletid1.toString()+"'" ;			
 			console.log("<<<<< SQL >>>>>");
 			console.log(sql);
 			connection.query(sql,function(error, results, fields) {
