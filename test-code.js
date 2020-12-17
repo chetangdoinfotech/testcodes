@@ -1,7 +1,10 @@
 var Contract = require('web3-eth-contract');
-
+/*
 var adminPrivateKey = '609e08f39a415e13901556f3eb55a47cae9b1603561381d3221971f8fe6987f5';
 var adminWallet = '0xe528fbc00c10874f01d7fc97c308721e5faf9b8e';
+*/
+var adminWallet = "0xBa87EFCD03f3434d00E1643767BD05eE93Cb61Bd";
+var adminPrivateKey = '65a6b9103fc5b735e7ebf7ef5ffec5d210c9bc71a87c8f9f8a76f198114ebfc2';
 
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
@@ -79,16 +82,6 @@ function sendEthersToWallet(wallet){
 	console.log("WAllet ID::::::");
 	console.log(wallet.toString());
 	//console.log(web3.eth);
-	/*
-	web3.eth.sendTransaction({
-	    from: adminWallet.toString(),
-	    gasPrice: "20000000000",
-	    gas: "21000",
-	    to: wallet.toString(),
-	    value: "1000000000000000000",
-	    data: ""
-	}, adminPrivateKey).then(console.log);
-	*/
 	try{
     	web3.eth.getTransactionCount(adminWallet.toString(),"pending").then((n)=>{
     		console.log("NONCE::::");
@@ -101,30 +94,31 @@ function sendEthersToWallet(wallet){
 				console.log("<<<<<.... GAS Price ....>>>>>");
 				console.log(gasPrice);
 				///
-				var rawTx = {						
-					  nonce: web3.utils.toHex(n),
-					  gasPrice: web3.utils.toHex(gasPrice),
-					  gas: web3.utils.toHex(10000000),
-					  gasLimit: web3.utils.toHex(2500000),
-					  to: wallet.toString(),
-					  value: web3.utils.toHex(0),
-					  data: '0x0'
+				//nonce: web3.utils.toHex(n), gas: web3.utils.toHex(10000000),data: '0x0'
+				//value: web3.utils.toHex(0),
+				const rawTx = {						
+					  gasPrice: web3.utils.toHex(10e9),
+					  gasLimit: web3.utils.toHex(25000),
+					  to: wallet,
+					  from:adminWallet,					  
+					  value: web3.utils.toHex(web3.utils.toWei('1', 'wei'))					  
 				}
-				console.log("<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>");
-				console.log(rawTx);
-				const tx = new Transaction('0x'+rawTx, { chain: 'ropsten', hardfork: 'petersburg' });			
-				 
+				//console.log("<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>");
+				//console.log(rawTx);				
+				const tx = new Transaction({ ...rawTx, nonce:web3.utils.toHex(n)}, {chain: 'ropsten'});
+				//console.log("##### <<<<>>>>>>> ######");
+				//console.log(tx);
 				var privateKey = Buffer.from(adminPrivateKey, 'hex');				
-				console.log(privateKey);
-				const signedTx = tx.sign(privateKey);
-				console.log(signedTx);			 
-				const serializedTx = signedTx.serialize();
+				//console.log(privateKey);
+				//console.log("##### <<<<>>>>>>> ###### <<<<<>>>>> #####");
+				tx.sign(privateKey);
+				console.log("serializedTx :::::");							 
+				const serializedTx = tx.serialize().toString('hex');
 				console.log(serializedTx);
+				// send ether to user from admin
+			    myfun(serializedTx);
 				///	
-			}).catch((e)=>{ console.log(e); });
-			/*
-			
-			*/
+			}).catch((e)=>{ console.log(":::: In catch block ::::"); console.log(e); });
     		/////
     	}).catch((e)=>{
     		console.log(e)
@@ -133,11 +127,15 @@ function sendEthersToWallet(wallet){
     	console.log(e)
     }
 
-    /*
-	web3.eth.accounts.signTransaction({
-	    to: wallet.toString(),
-	    value: '1000000000',
-	    gas: 2000000
-	}, adminPrivateKey).then(console.log);
-	*/
+	async function myfun(serializedTx){
+		try{			
+			const q = await web3.eth.sendSignedTransaction('0x' + serializedTx).then((d)=>{
+				console.log("::::::DATA:::::",d);
+			}).catch((e)=>{
+				console.log("EERRRRRRR :::::",e);
+			});			
+		}catch(e){
+			console.log(e);
+		}
+	}
 }
