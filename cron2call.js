@@ -26,12 +26,13 @@ var RikebyJSON = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","t
 
 
 // Main net
-//Contract.setProvider('wss://:e36b9ab0afb6412683d28e0843ff15eb@mainnet.infura.io/ws/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
+/*
+Contract.setProvider('wss://:e36b9ab0afb6412683d28e0843ff15eb@mainnet.infura.io/ws/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
 // Mainnet address 
 var Contractaddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
 var	jsonInterface =	[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_upgradedAddress","type":"address"}],"name":"deprecate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"deprecated","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_evilUser","type":"address"}],"name":"addBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"upgradedAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balances","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maximumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_maker","type":"address"}],"name":"getBlackListStatus","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowed","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newBasisPoints","type":"uint256"},{"name":"newMaxFee","type":"uint256"}],"name":"setParams","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"issue","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"redeem","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"basisPointsRate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isBlackListed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_clearedUser","type":"address"}],"name":"removeBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"MAX_UINT","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_blackListedUser","type":"address"}],"name":"destroyBlackFunds","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_initialSupply","type":"uint256"},{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"_decimals","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Issue","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Redeem","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"newAddress","type":"address"}],"name":"Deprecate","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"feeBasisPoints","type":"uint256"},{"indexed":false,"name":"maxFee","type":"uint256"}],"name":"Params","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_blackListedUser","type":"address"},{"indexed":false,"name":"_balance","type":"uint256"}],"name":"DestroyedBlackFunds","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"AddedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"RemovedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"}];
-//var contract = new Contract(jsonInterface, Contractaddress);
-
+var contract = new Contract(jsonInterface, Contractaddress);
+*/
 
 //RINKEBY
 Contract.setProvider('wss://:e36b9ab0afb6412683d28e0843ff15eb@rinkeby.infura.io/ws/v3/85cbf3d2da0445e4b5d0e5ca2f2eea45');
@@ -40,36 +41,39 @@ var RinkebyTestNetContract = "0xe5f33a0a3d5a77b9fea8b793fec524238e9f3d9a";
 var contract = new Contract(RikebyJSON, RinkebyTestNetContract);
 
 var wallets = [];
-connection.query('select address from coin_address where admin_ethsent_touser=1 AND cron2_called=0 limit 2', function (error, results, fields) {
+connection.query('select address from coin_address where admin_ethsent_touser=1 AND cron2_called=0 limit 5', function (error, results, fields) {
   if (error) throw error;
   if(results.length > 0){
   		console.log("=====================================================");			  					  		
 		console.log(Date());	
-  		console.log(results[0].address);
-  		if(results[0].address.indexOf('0x') < 0){
-  			addr = '0x'+results[0].address;  			
-  		}else{
-  			addr = results[0].address;
-  		}
-  		wallets.push(addr);
+		console.log(results);
+  		console.log(results[0].address);  		
+  		for(var i=0;i<results.length;i++){
+	  		if(results[i].address.indexOf('0x') < 0){
+	  			addr = '0x'+results[i].address;  			
+	  		}else{
+	  			addr = results[i].address;
+	  		}
+	  		wallets.push(addr);
+	  	}
   }else{
   		console.log("no record found");
   }
 });
 
 setTimeout(()=>{	
-	for(i=0;i<wallets.length;i++){
-		console.log(wallets);			
+	for(i=0;i<wallets.length;i++){				
 		balanceChecker(wallets[i].toString());
 	}	
 }, 2000);
 
+setTimeout(()=>{ process.exit(1); }, 60000);
 //'0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a'
-async function balanceChecker(wallet){
+function balanceChecker(wallet){
 	console.log(" <<<<<<< In balanceChecker Function ... >>>>>>>>>");
 	// wallet ether balance check
 	web3.eth.handleRevert=true;
-	await web3.eth.getBalance(wallet.toString()).then(mybalance =>{
+	web3.eth.getBalance(wallet.toString()).then(mybalance =>{
 		console.log("Mybalance....",mybalance);
 		if(mybalance > 0){
 				contract.methods.balanceOf(wallet)
@@ -79,7 +83,7 @@ async function balanceChecker(wallet){
 					// uncomment below line ...
 					//if(res > 0){
 						// make a write/transfer call here ....
-						transferCotractMethod(wallet);			
+						var z = transferCotractMethod(wallet);			
 					//}
 				}).catch(function(e){
 					console.log(e);
@@ -88,7 +92,7 @@ async function balanceChecker(wallet){
 	});	
 }
 
-async function transferCotractMethod(toWallet){
+function transferCotractMethod(toWallet){
 	// Number of tokens to transfer -
 	tokensToTransfer=10;	
 	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<");
@@ -102,12 +106,37 @@ async function transferCotractMethod(toWallet){
 	  		console.log(results[0].address);
 	  		/////	  		
 	  		contract.methods.transfer(toWallet, tokensToTransfer)
-			.call({from: results[0].address})
-			.then(function(res){				
+			.call({from: results[0].address, gas:5000000})
+			.then(function(res){	
+					console.log("RESULT :::::");			
 					console.log(res);	
+   					var t =	chagetableStatus(toWallet);
 			}).catch(function(e){
 					console.log("ERRRRRRRRRR::::>>>>>",e);
-			});			
+			});	
 	  		////
   	});
+}
+
+
+function chagetableStatus(walletid){
+	console.log(">>>>> IN CHANGE TABLE STATUS >>>>>");
+	try{
+		var walletid1 = walletid.substr(2);
+		var sql="update coin_address SET `cron2_called`=1 where address='"+walletid.toString()+"' || address='"+walletid1.toString()+"'" ;			
+		console.log("<<<<< SQL >>>>>");
+		console.log(sql);
+		connection.query(sql,function(error, results, fields) {
+			if (error) throw error;
+			if(results){
+				console.log(">>>>>>>>>> Executed query <<<<<<<<<<");
+		  		console.log(results);
+		  		console.log("=====================================================");			  			  					  		
+			}else{
+			  	console.log("no record found");
+			}			
+		});
+	}catch(e){
+		console.log(e);
+	}		
 }
