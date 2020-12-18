@@ -33,18 +33,21 @@ var Contractaddress = "0xdac17f958d2ee523a2206206994597c13d831ec7";
 var contract = new Contract(jsonInterface, Contractaddress);
 
 var wallets = [];
-connection.query('select address from coin_address where admin_ethsent_touser=0 limit 2' , function (error, results, fields) {
+connection.query('select address from coin_address where admin_ethsent_touser=0 limit 5' , function (error, results, fields) {
   if (error) throw error;
   if(results.length > 0){
   		console.log("=====================================================");			  					  		
 		console.log(Date());	
+		console.log(results);
   		console.log(results[0].address);
-  		if(results[0].address.indexOf('0x') < 0){
-  			addr = '0x'+results[0].address;  			
-  		}else{
-  			addr = results[0].address;
-  		}
-  		wallets.push(addr);
+  		for(var i=0;i<results.length;i++){
+	  		if(results[i].address.indexOf('0x') < 0){
+	  			addr = '0x'+results[i].address;  			
+	  		}else{
+	  			addr = results[i].address;
+	  		}
+	  		wallets.push(addr);
+	  	}
   }else{
   		console.log("no record found");
   }

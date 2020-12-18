@@ -67,7 +67,11 @@ setTimeout(()=>{
 	}	
 }, 2000);
 
-setTimeout(()=>{ process.exit(1); }, 60000);
+setTimeout(()=>{ 
+	console.log(">>>> Closing mysql conection from code.... <<<");
+    connection.end(); 
+	process.exit(1); 
+}, 60000);
 //'0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a'
 function balanceChecker(wallet){
 	console.log(" <<<<<<< In balanceChecker Function ... >>>>>>>>>");
