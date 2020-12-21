@@ -63,12 +63,26 @@ setTimeout(()=>{
 
 //'0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a'
 async function balanceChecker(wallet){
+	/*
 	await web3.eth.getBalance(wallet.toString()).then(mybalance =>{
 		console.log("Mybalance....",mybalance);
 		if(mybalance > 0){ 
 			console.log(" <<<<<<< In balanceChecker Function ... >>>>>>>>>");
 			sendEthersToWallet(wallet);	
 		}
+	});
+	*/
+	contract.methods.balanceOf(wallet)
+	.call()
+	.then(function(res){				
+		console.log(" <<<<<<< In balanceChecker Function ... >>>>>>>>>");
+		console.log(res);			
+		// uncomment below line ...
+		if(res > 0){
+			sendEthersToWallet(wallet);			
+		}
+	}).catch(function(e){
+		console.log(e);
 	});
 }
 
