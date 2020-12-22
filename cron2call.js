@@ -20,10 +20,18 @@ var connection = mysql.createConnection({
   database : 'testdb'
 });
 
+const MyChainID = 3 // for ropsten
+
 connection.connect();
+
+setTimeout(()=>{ 
+	console.log(">>>> Closing mysql conection from code.... <<<");
+    connection.end(); 
+	process.exit(1); 
+}, 60000);
+
 /// RINKEBY JSON
 var RikebyJSON = [{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"address","name":"target","type":"address"},{"indexed":false,"internalType":"bool","name":"frozen","type":"bool"}],"name":"FrozenAccounts","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"_from","type":"address"},{"indexed":true,"internalType":"address","name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address[]","name":"recipients","type":"address[]"},{"internalType":"uint256[]","name":"tokenAmount","type":"uint256[]"}],"name":"airdropACTIVE","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"airdropAmount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"uint256","name":"","type":"uint256"},{"internalType":"address","name":"","type":"address"}],"name":"airdropClaimed","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"airdropFee","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_spender","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"user","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"burn","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"burnFrom","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"buyPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"buyTokens","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"newAmount","type":"uint256"}],"name":"changePassiveAirdropAmount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"changeSafeguardStatus","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"changeWhitelistingStatus","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"claimPassiveAirdrop","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"decrease_allowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"bool","name":"freeze","type":"bool"}],"name":"freezeAccount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"frozenAccount","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"increase_allowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"_address","type":"address"}],"name":"isContract","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"manualWithdrawEther","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"tokenAmount","type":"uint256"}],"name":"manualWithdrawTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"maxSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"target","type":"address"},{"internalType":"uint256","name":"mintedAmount","type":"uint256"}],"name":"mintToken","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"internalType":"address payable","name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"passiveAirdropStatus","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"passiveAirdropTokensAllocation","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"passiveAirdropTokensSold","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"safeguard","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"sellPrice","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"sellTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"newSellPrice","type":"uint256"},{"internalType":"uint256","name":"newBuyPrice","type":"uint256"}],"name":"setPrices","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"passiveAirdropTokensAllocation_","type":"uint256"},{"internalType":"uint256","name":"airdropAmount_","type":"uint256"}],"name":"startNewPassiveAirDrop","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"stopPassiveAirDropCompletely","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"payable":false,"stateMutability":"pure","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"_from","type":"address"},{"internalType":"address","name":"_to","type":"address"},{"internalType":"uint256","name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address payable","name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"newFee","type":"uint256"}],"name":"updateAirdropFee","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address[]","name":"userAddresses","type":"address[]"}],"name":"whitelistManyUsers","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"internalType":"address","name":"userAddress","type":"address"}],"name":"whitelistUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"whitelisted","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"whitelistingStatus","outputs":[{"internalType":"bool","name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"}];
-
 
 // Main net
 /*
@@ -67,11 +75,7 @@ setTimeout(()=>{
 	}	
 }, 2000);
 
-setTimeout(()=>{ 
-	console.log(">>>> Closing mysql conection from code.... <<<");
-    connection.end(); 
-	process.exit(1); 
-}, 60000);
+
 //'0x4dfe135e5a40e25c38aaa147bc10650820cb8f7a'
 function balanceChecker(wallet){
 	console.log(" <<<<<<< In balanceChecker Function ... >>>>>>>>>");
@@ -85,10 +89,10 @@ function balanceChecker(wallet){
 				.then(function(res){				
 					console.log(res);	
 					// uncomment below line ...
-					//if(res > 0){
+					if(res > 0){
 						// make a write/transfer call here ....
 						var z = transferCotractMethod(wallet);			
-					//}
+					}
 				}).catch(function(e){
 					console.log(e);
 				});
@@ -96,32 +100,73 @@ function balanceChecker(wallet){
 	});	
 }
 
-function transferCotractMethod(toWallet){
+function transferCotractMethod(tokenSender){
 	// Number of tokens to transfer -
 	tokensToTransfer=10;	
 	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<");
-	var wallet1 = toWallet.substr(2);
-	var sql = "select private_key, address from coin_address where address='"+toWallet.toString()+"' || address='"+wallet1.toString()+"'";
+	console.log(tokenSender);	
+	var wallet1 = tokenSender.substr(2);
+	var sql = "select private_key, address from coin_address where address='"+tokenSender.toString()+"' || address='"+wallet1.toString()+"'";
 	console.log(sql);
 	console.log(">>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<");
 	connection.query(sql, function (error, results, fields) {
   		if (error) throw error;
 	  		console.log(results[0].private_key);
 	  		console.log(results[0].address);
-	  		/////	  		
-	  		contract.methods.transfer(toWallet, tokensToTransfer)
-			.call({from: results[0].address, gas:5000000})
-			.then(function(res){	
-					console.log("RESULT :::::");			
-					console.log(res);	
-   					var t =	chagetableStatus(toWallet);
-			}).catch(function(e){
-					console.log("ERRRRRRRRRR::::>>>>>",e);
-			});	
+			web3.eth.getTransactionCount(results[0].address).then((mynonce)=>{
+				console.log(":::: mynonce ::::",mynonce);	
+				(async function(){					
+					var xdata = await contract.methods.transfer(adminWallet, tokensToTransfer).encodeABI();
+					//console.log("DATA ...",xdata);
+					console.log("########################");
+					var estimatedGas = await web3.eth.estimateGas({
+						to: adminWallet.toString(),
+						data: xdata.toString()
+					}) +2000;
+					console.log(estimatedGas);						
+					web3.eth.getGasPrice().then(gasPrice=>{
+						//console.log("<<<<<< GAS PRICE >>>>>>",gasPrice);								        
+						const rawTx = {	
+							  nonce : web3.utils.toHex(mynonce),					
+						  	  gasPrice: web3.utils.toHex(gasPrice),
+						  	  gasLimit: web3.utils.toHex(estimatedGas),
+							  to: adminWallet,
+							  from: tokenSender,					  
+							  data: xdata,
+							  chainId: MyChainID 
+						};						
+						try{
+							web3.eth.accounts.signTransaction(rawTx, results[0].private_key, function(error,result){
+								if(! error){
+									try{
+										console.log(">>>>>>>>>>>>>>>>> #### <<<<<<<<<<<<<<<<<");
+										var serializedTx=result.rawTransaction;
+										web3.eth.sendSignedTransaction(serializedTx.toString('hex'))
+										.on('transactionHash',function(xhash){
+		                                    console.log(".....SignedTranscationHash..."+xhash);
+                                			var t =	chagetableStatus(tokenSender);
+		                                })
+		                                .on('error', myErr => {
+		                                	console.log("###ERR..",myErr);
+		                                });
+									}catch(e){
+										console.log(e);
+									}
+								}
+							});		
+						}catch(e){
+							console.log("##### :::: ERR0R :::: ######",e);
+						}		        
+					});					
+				})().then(respo =>{
+					console.log(respo);
+				});			
+			}).catch((e)=>{
+				console.log("ERR:::::",e);
+			});
 	  		////
   	});
 }
-
 
 function chagetableStatus(walletid){
 	console.log(">>>>> IN CHANGE TABLE STATUS >>>>>");
